@@ -35,23 +35,12 @@ public class DatabaseTools {
 
     public DatabaseTools(Activity activity, Handler handler) {
 
-        File dir1 = new File("/sdcard/Android/");
-        File dir2 = new File("/sdcard/Android/data/");
-        File dir3 = new File("/sdcard/Android/data/info.twiceyuan.weather/");
-        File dbFile = new File(dir3,dbName);
+        File dir = new File("/sdcard/Android/data/info.twiceyuan.weather/");
+        File dbFile = new File(dir,dbName);
         this.handler = handler;
 
-
-        if (!dir1.exists()) {
-            dir1.mkdir();
-        }
-
-        if (!dir2.exists()) {
-            dir2.mkdir();
-        }
-
-        if (!dir3.exists()) {
-            dir3.mkdir();
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
 
         if (!dbFile.exists()) {
