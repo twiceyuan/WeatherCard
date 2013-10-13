@@ -27,7 +27,7 @@ public class DetailController implements Runnable {
     private LinearLayout cardLayout;
     private NowLayout card_container;
 
-    final private int SLEEP_TIME = 100;
+    final private int SLEEP_TIME = 500;
     final private int ADD_TO_DETAIL = 1984;
 
     public DetailController(Activity acitity) {
