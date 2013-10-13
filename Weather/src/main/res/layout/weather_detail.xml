@@ -11,9 +11,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:gravity="top"
-            android:textSize="24sp"
-            android:background="#eee"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:background="#ddd"
             android:text="@string/load_detail"/>
 
     <ScrollView

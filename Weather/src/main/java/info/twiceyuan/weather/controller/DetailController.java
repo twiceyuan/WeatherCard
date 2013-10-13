@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import info.twiceyuan.weather.R;
 import info.twiceyuan.weather.domain.Weather;
+import info.twiceyuan.weather.util.WeekConverter;
 import info.twiceyuan.weather.view.NowLayout;
 
 /**
@@ -62,9 +63,10 @@ public class DetailController implements Runnable {
 
     @Override
     public void run() {
+
         cardLayout.removeAllViews();
 
-        cityView.setText(weather.getCity());
+        cityView.setText(weather.getCity() +"  "+ weather.getDate_y() + "  " + weather.getWeek());
 
         // 添加天气卡片
         LinearLayout todaWeather = getCard();
@@ -112,23 +114,22 @@ public class DetailController implements Runnable {
         SystemClock.sleep(SLEEP_TIME);
 
         // 获得当前星期数 1~7的形式
-        int thisWeek = getWeekint(weather.getWeek());
+        int thisWeekint = WeekConverter.getWeekint(weather.getWeek());
 
         for (int i = 1; i <= 5; i++) {
 
-            SystemClock.sleep(50);
+            SystemClock.sleep(200);
 
             LinearLayout nextWeek = getCard();
             // 以星期作为标题
-            setLineTitle(nextWeek, getWeek((thisWeek + i) % 7));
+            setLineTitle(nextWeek, WeekConverter.getWeek((thisWeekint + i) % 7));
 
             String thisWeekInfo =
 
-                    "天气：" + weather.getWeather()[i] + "\n" +
-                            "温度：" + weather.getTemp()[i] + "\n" +
-                            "风向：" + weather.getWind()[i];
+                    "天气：\t" + weather.getWeather()[i] + "\n" +
+                    "温度：\t" + weather.getTemp()[i] + "\n" +
+                    "风向：\t" + weather.getWind()[i] + "\n";
 
-            setLineTitle(nextWeek, weather.getUv_info());
             setLineBody(nextWeek,thisWeekInfo);
 
             card_container = new NowLayout(activity);
@@ -150,22 +151,8 @@ public class DetailController implements Runnable {
 
     // 设置卡片内容
     void setLineBody(LinearLayout card, String context) {
-        ((TextView) card.getChildAt(1)).setText(context);
+        LinearLayout temp = (LinearLayout)card.getChildAt(1);
+        ((TextView) temp.getChildAt(0)).setText(context);
     }
 
-    // 根据字符串输出星期几，比如输入“星期一”，则返回1
-    private int getWeekint(String week) {
-        String[] strings = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"};
-        for (int i = 0; i < strings.length; i++) {
-            if (strings[i].equals(week)) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    // 和上面那个方法相反
-    private String getWeek(int i) {
-        return (new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"})[i % 7];
-    }
 }

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.*;
 import info.twiceyuan.weather.R;
 import info.twiceyuan.weather.domain.Weather;
+import info.twiceyuan.weather.util.WeekConverter;
 
 import java.util.HashMap;
 
@@ -38,7 +39,7 @@ public class CardViewTools {
         TextView[] weekUps = new TextView[4];
         TextView[] weekDowns = new TextView[4];
 
-        int iweek = getWeekint(weather.getWeek());
+        int iweek = WeekConverter.getWeekint(weather.getWeek());
 
         cardView = (RelativeLayout) RelativeLayout.inflate(
                 activity, R.layout.cardview, null);
@@ -68,28 +69,12 @@ public class CardViewTools {
 
 
         for(int i = 0;i < 4;i++) {
-            weekViews[i].setText(getWeek(iweek + i + 1));
+            weekViews[i].setText(WeekConverter.getWeek(iweek + i + 1));
             weekWeatherIconView[i].setImageDrawable(getWatherIcon(activity,weather.getWeathericon()[i+1]));
             weekUps[i].setText(weather.getTemp()[i+1].split("~")[0]);
             weekDowns[i].setText(weather.getTemp()[i+1].split("~")[1]);
         }
         return this.cardView;
-    }
-
-    // 根据字符串输出星期几，比如输入“星期一”，则返回1
-    private int getWeekint(String week) {
-        String[] strings = {"星期一","星期二","星期三","星期四","星期五","星期六","星期天"};
-        for(int i = 0;i < strings.length;i++) {
-            if(strings[i].equals(week)) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    // 和上面那个方法相反
-    private String getWeek(int i) {
-        return (new String[]{"星期一","星期二","星期三","星期四","星期五","星期六","星期天"})[i % 7];
     }
 
     // 天气图标选择。输入图标编号，输出Drawable
