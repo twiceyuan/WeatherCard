@@ -16,7 +16,7 @@ import info.twiceyuan.weather.view.NowLayout;
 /**
  * Created by twiceyuan on 13-6-16.
  */
-public class WeatherDetailActivity extends Activity {
+public class WeatherDetail extends Activity {
 
 
     public void onCreate(Bundle savedInstanceState) {

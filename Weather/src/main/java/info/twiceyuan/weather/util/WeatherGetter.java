@@ -48,6 +48,12 @@ public class WeatherGetter {
             temp[3] = jo.getString("temp4");
             temp[4] = jo.getString("temp5");
             temp[5] = jo.getString("temp6");
+
+            // 调整温度格式
+            for(int i = 0;i < temp.length;i++) {
+                temp[i] = exchange(temp[i]);
+            }
+
             w.setTemp(temp);
 
             String[] tempF = new String[6];
@@ -105,5 +111,20 @@ public class WeatherGetter {
             return null;
         }
         return w;
+    }
+
+    // 调整温度格式为[低温]～[高温]的格式 如：原为21～15，则替换为15~21
+    private static String exchange(String origin) {
+
+        int number[] = new int[2];
+        String numberStr[] = origin.split("~");
+        for(int i = 0;i < 2;i++) {
+            number[i] = Integer.parseInt(numberStr[i].substring(0,numberStr[i].length()-1));
+        }
+        if(number[0] < number[1]) {
+            return number[0] + "℃~" + number[1] + "℃";
+        } else {
+            return number[1] + "℃~" + number[0] + "℃";
+        }
     }
 }

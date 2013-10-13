@@ -140,7 +140,6 @@ public class DetailController implements Runnable {
     // 创造一个Card
     LinearLayout getCard() {
         LinearLayout card = (LinearLayout) LinearLayout.inflate(activity, R.layout.weather_detail_card, null);
-        // ((ViewGroup)card.getParent()).removeAllViews();
         return card;
     }
 

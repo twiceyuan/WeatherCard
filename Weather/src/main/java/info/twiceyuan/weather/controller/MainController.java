@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.*;
 
 import info.twiceyuan.weather.R;
-import info.twiceyuan.weather.WeatherDetailActivity;
+import info.twiceyuan.weather.WeatherDetail;
 import info.twiceyuan.weather.domain.Weather;
 import info.twiceyuan.weather.util.*;
 import info.twiceyuan.weather.view.CardViewTools;
@@ -144,7 +144,9 @@ public class MainController implements Button.OnClickListener {
                 InputStream is = StreamGetter.get(url);
 
                 card_container = new NowLayout(activity);
-                weather = WeatherGetter.get(is);
+                final Weather current = WeatherGetter.get(is);
+
+                weather = current;
 
                 CardViewTools cvtools = new CardViewTools(activity, weather);
                 RelativeLayout cardView = cvtools.getCardView();
@@ -156,11 +158,12 @@ public class MainController implements Button.OnClickListener {
 
                         // 传递 Weather 参数并启动新的天气详情 Activity
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("weather", weather);
+
+                        bundle.putSerializable("weather", current);
 
                         Intent intent = new Intent();
                         intent.putExtras(bundle);
-                        intent.setClass(activity, WeatherDetailActivity.class);
+                        intent.setClass(activity, WeatherDetail.class);
                         activity.startActivity(intent);
                     }
                 });

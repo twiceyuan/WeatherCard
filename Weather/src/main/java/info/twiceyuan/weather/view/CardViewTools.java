@@ -64,7 +64,7 @@ public class CardViewTools {
         cityNameView.setText(cityName);
         weatherView.setText(weather.getWeather()[0]);
         weatherImageView.setImageDrawable(getWatherIcon(activity,weather.getWeathericon()[0]));
-        tempView.setText(exchange(weather.getTemp()[0]));
+        tempView.setText(weather.getTemp()[0]);
 
 
         for(int i = 0;i < 4;i++) {
@@ -74,21 +74,6 @@ public class CardViewTools {
             weekDowns[i].setText(weather.getTemp()[i+1].split("~")[1]);
         }
         return this.cardView;
-    }
-
-    // 调整温度格式 如：原为21～15，则兑换两数位置
-    private String exchange(String origin) {
-
-        int number[] = new int[2];
-        String numberStr[] = origin.split("~");
-        for(int i = 0;i < 2;i++) {
-            number[i] = Integer.parseInt(numberStr[i].substring(0,numberStr[i].length()-1));
-        }
-        if(number[0] < number[1]) {
-            return number[0] + "℃~" + number[1] + "℃";
-        } else {
-            return number[1] + "℃~" + number[0] + "℃";
-        }
     }
 
     // 根据字符串输出星期几，比如输入“星期一”，则返回1
