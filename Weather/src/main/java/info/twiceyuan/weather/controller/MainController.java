@@ -138,6 +138,7 @@ public class MainController implements Button.OnClickListener {
             for (int i = 0; i < cityNumbers.size(); i++) {
 
                 // http://m.weather.com.cn/data/[城市编号].html
+                // http://m.weather.com.cn/data/101070201.html
 
                 String url = "http://m.weather.com.cn/data/" + cityNumbers.get(i) + ".html";
 
