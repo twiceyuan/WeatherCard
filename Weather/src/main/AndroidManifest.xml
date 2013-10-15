@@ -19,12 +19,17 @@
         <activity
             android:name="info.twiceyuan.weather.MainActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity android:name="info.twiceyuan.weather.WeatherDetail" />
+        <activity
+            android:name="info.twiceyuan.weather.WelcomeActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WeatherDetail"/>
     </application>
 
 </manifest>
