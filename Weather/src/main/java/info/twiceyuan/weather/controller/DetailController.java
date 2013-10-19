@@ -72,7 +72,7 @@ public class DetailController implements Runnable {
         cityView.setText(weather.getCity() +"  "+ weather.getDate_y() + "  " + weather.getWeek());
 
         // 添加今日详细天气，样式：Card1
-        RelativeLayout todayWeather = (RelativeLayout) RelativeLayout.inflate(activity, R.layout.weather_detail_card1, null);;
+        RelativeLayout todayWeather = (RelativeLayout) RelativeLayout.inflate(activity, R.layout.weather_detail_card1, null);
 
         ImageView twIcon = (ImageView) ((RelativeLayout)todayWeather.getChildAt(0)).getChildAt(0);
         TextView twText = (TextView) (((RelativeLayout) todayWeather.getChildAt(0)).getChildAt(2));

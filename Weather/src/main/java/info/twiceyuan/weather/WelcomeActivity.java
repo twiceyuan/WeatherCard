@@ -1,38 +1,46 @@
 package info.twiceyuan.weather;
 
-import info.twiceyuan.weather.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.view.MotionEvent;
-import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import info.twiceyuan.weather.util.WeatherIconGetter;
+import info.twiceyuan.weather.view.NowLayout;
 
 /**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
  *
- * @see SystemUiHider
  */
 public class WelcomeActivity extends Activity {
 
-    Handler handler;
+    private Handler handler;
+    private final int ADD_VIEW = 6941;
+
+    private LinearLayout welcomeLayout;
+    private NowLayout currentCard;
+
+    private final int[] ids = {R.id.welcome_layout_1,R.id.welcome_layout_1,R.id.welcome_layout_2,R.id.welcome_layout_2};
+    private final String[] weathertexts = {"晴","云","阴","雨"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.welcome);
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                setContentView(R.layout.welcome);
+
+                if(msg.what == ADD_VIEW) {
+
+                    welcomeLayout.addView(currentCard);
+                }
             }
         };
 
@@ -48,15 +56,39 @@ public class WelcomeActivity extends Activity {
 
         @Override
         public void run() {
-            handler.sendEmptyMessage(0);
-            SystemClock.sleep(800);
-            handler.sendEmptyMessage(0);
+
+
+            for(int i = 0;i < 4;i++) {
+                LinearLayout newCardContent = getWelcomeCard();
+
+                ImageView icon = (ImageView) newCardContent.getChildAt(0);
+                TextView  text = (TextView)  newCardContent.getChildAt(1);
+
+                icon.setImageDrawable(WeatherIconGetter.getWatherIcon(WelcomeActivity.this,i));
+
+                text.setText(weathertexts[i]);
+
+                currentCard = new NowLayout(WelcomeActivity.this);
+                currentCard.addView(newCardContent);
+
+                welcomeLayout = (LinearLayout) findViewById(ids[i]);
+
+                handler.sendEmptyMessage(ADD_VIEW);
+
+                SystemClock.sleep(300);
+            }
+
+            SystemClock.sleep(500);
 
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(),MainActivity.class);
             startActivity(intent);
             WelcomeActivity.this.finish();
         }
+    }
+
+    private LinearLayout getWelcomeCard() {
+        return (LinearLayout) LinearLayout.inflate(WelcomeActivity.this, R.layout.welcome_card, null);
     }
 
 }
