@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -35,7 +36,8 @@ public class MainController implements Button.OnClickListener {
     private LinearLayout card_parent;
 
     public final static int NOT_FOUND = 404;
-    public final static int REFRESH = 0;
+    public final static int CLEAN = 0;
+    public final static int REFRESH = 1024;
     public final static int ADD_ONE = 1993;
     public final static int EMPTY_INPUT = 408;
 
@@ -70,8 +72,9 @@ public class MainController implements Button.OnClickListener {
                     /** 没有任何输入 **/
                     Toast.makeText(activity, "请输入所要查找的城市(县)名", Toast.LENGTH_SHORT).show();
 
-                } else if (msg.what == REFRESH) {
+                } else if (msg.what == CLEAN) {
                     /** 清除View中的所有CardView **/
+
                     card_parent.removeAllViews();
 
                 } else if (msg.what == ADD_ONE) {
@@ -79,12 +82,17 @@ public class MainController implements Button.OnClickListener {
                     card_parent.addView(card_container);
                     card_parent.invalidate();
 
+                } else if(msg.what == REFRESH) {
+                    /** 重新加载城市 */
+
+                    card_parent.removeAllViews();
+                    loadCity();
                 }
             }
         };
 
         /** 数据库操作相关工具类 **/
-        dbTools = new DatabaseTools(activity, handler);
+        dbTools = new DatabaseTools(activity);
 
         loadCity();
     }
@@ -130,7 +138,7 @@ public class MainController implements Button.OnClickListener {
         @Override
         public synchronized void run() {
 
-            handler.sendEmptyMessage(REFRESH);
+            handler.sendEmptyMessage(CLEAN);
 
             // 新建一个卡片容器
             card_container = new NowLayout(activity);
@@ -149,7 +157,7 @@ public class MainController implements Button.OnClickListener {
 
                 weather = current;
 
-                CardViewTools cvtools = new CardViewTools(activity, weather);
+                CardViewTools cvtools = new CardViewTools(activity, weather, handler);
                 RelativeLayout cardView = cvtools.getCardView();
 
                 card_container.addView(cardView);
@@ -193,7 +201,7 @@ public class MainController implements Button.OnClickListener {
             if(cityName.equals("")) {
                 handler.sendEmptyMessage(EMPTY_INPUT);
 
-                CloseDialog.closeDialog(mDialog,false);
+                DialogTool.closeDialog(mDialog, false);
                 return;
             }
 
@@ -205,7 +213,7 @@ public class MainController implements Button.OnClickListener {
             if (cityNumber.equals("ERROR")) {
                 handler.sendEmptyMessage(NOT_FOUND);
 
-                CloseDialog.closeDialog(mDialog,false);
+                DialogTool.closeDialog(mDialog, false);
                 return;
             }
 
@@ -216,7 +224,7 @@ public class MainController implements Button.OnClickListener {
             loadCity();
 
             // 关闭对话框
-            CloseDialog.closeDialog(mDialog,true);
+            DialogTool.closeDialog(mDialog, true);
         }
     }
 
@@ -226,7 +234,7 @@ public class MainController implements Button.OnClickListener {
         public void onClick(DialogInterface dialog, int which) {
 
             // 关闭窗口不执行任何操作
-            CloseDialog.closeDialog(dialog,true);
+            DialogTool.closeDialog(dialog, true);
         }
     }
 

@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 /**
  * 此类终中的方法用于Dialog的监听器OnClick方法中，传递DialogInterface参数
  */
-public class CloseDialog {
+public class DialogTool {
 
     /** 是否关闭对话框 **/
     public static void closeDialog(DialogInterface mDialog, boolean flag) {

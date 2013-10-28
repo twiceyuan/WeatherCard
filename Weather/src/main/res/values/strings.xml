@@ -9,8 +9,13 @@
     <string name="load_detail">加载城市天气详情</string>
     <string name="line_title">Line Title</string>
     <string name="line_detail">Line Detail</string>
-    <string name="title_activity_welcome">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="delete">–</string>
+
+    <string-array name="spinnername">
+        <item>...</item>
+        <item>删除</item>
+        <item>上移</item>
+        <item>下移</item>
+    </string-array>
 
 </resources>

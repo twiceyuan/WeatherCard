@@ -12,7 +12,8 @@ public class WeatherIconGetter {
 
     public static Drawable getWatherIcon(Activity activity,int icon) {
 
-        int iconId = 99;
+        int iconId;
+
         switch (icon) {
             case 0: // 晴
                 iconId = R.drawable.weather_sunny;
