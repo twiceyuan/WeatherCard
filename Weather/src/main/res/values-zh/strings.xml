@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">卡片天气</string>
+    <string name="menu_settings">设置</string>
+    <string name="hello_world">初始化...</string>
+    <string name="add_button">添加城市</string>
+    <string name="input_city">输入城市名称</string>
+    <string name="load_detail">加载城市天气详情</string>
+    <string name="line_title">行标题</string>
+    <string name="line_detail">行详细内容</string>
+    <string name="delete">–</string>
+
+    <string-array name="spinnername">
+        <item>...</item>
+        <item>删除</item>
+        <item>上移</item>
+        <item>下移</item>
+    </string-array>
+
+</resources>

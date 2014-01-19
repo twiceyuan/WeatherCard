@@ -4,18 +4,18 @@
     <string name="app_name">Weather Card</string>
     <string name="menu_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="add_button">添加城市</string>
-    <string name="input_city">输入城市名称</string>
-    <string name="load_detail">加载城市天气详情</string>
+    <string name="add_button">Add City</string>
+    <string name="input_city">input city\'s name</string>
+    <string name="load_detail">load weather detail</string>
     <string name="line_title">Line Title</string>
     <string name="line_detail">Line Detail</string>
     <string name="delete">–</string>
 
     <string-array name="spinnername">
         <item>...</item>
-        <item>删除</item>
-        <item>上移</item>
-        <item>下移</item>
+        <item>delete</item>
+        <item>put up</item>
+        <item>put down</item>
     </string-array>
 
 </resources>

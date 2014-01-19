@@ -10,16 +10,20 @@
         android:id="@+id/welcome_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="2"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_weight="1"
             android:id="@+id/welcome_layout_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
         </LinearLayout>
+
         <LinearLayout
+            android:layout_weight="1"
             android:id="@+id/welcome_layout_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

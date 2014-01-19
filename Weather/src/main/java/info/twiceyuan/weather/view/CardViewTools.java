@@ -31,7 +31,7 @@ public class CardViewTools {
 
     private String cityName;
 
-    public CardViewTools(Activity activity,Weather weather,Handler handler) {
+    public CardViewTools(Activity activity, Weather weather, Handler handler) {
 
         this.activity = activity;
         this.weather = weather;
@@ -70,7 +70,7 @@ public class CardViewTools {
             @Override
             public void onClick(View v) {
 
-                if(dbTools.deleteCity(weather.getCityid()).equals("success")) {
+                if (dbTools.deleteCity(weather.getCityid()).equals("success")) {
                     handler.sendEmptyMessage(MainController.REFRESH); // 通知主控制器刷新
                 }
             }
@@ -79,7 +79,7 @@ public class CardViewTools {
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dbTools.modifyOrder(weather.getCityid(),1).equals("up")) {
+                if (dbTools.modifyOrder(weather.getCityid(), 1).equals("up")) {
                     handler.sendEmptyMessage(MainController.REFRESH); // 通知主控制器刷新
                 }
             }
@@ -88,7 +88,7 @@ public class CardViewTools {
         downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dbTools.modifyOrder(weather.getCityid(),2).equals("down")) {
+                if (dbTools.modifyOrder(weather.getCityid(), 2).equals("down")) {
                     handler.sendEmptyMessage(MainController.REFRESH); // 通知主控制器刷新
                 }
             }
@@ -113,12 +113,11 @@ public class CardViewTools {
         weatherImageView.setImageDrawable(WeatherIconGetter.getWatherIcon(activity, weather.getWeathericon()[0]));
         tempView.setText(weather.getTemp()[0]);
 
-
-        for(int i = 0;i < 4;i++) {
+        for (int i = 0; i < 4; i++) {
             weekViews[i].setText(WeekConverter.getWeek(iweek + i + 1));
-            weekWeatherIconView[i].setImageDrawable(WeatherIconGetter.getWatherIcon(activity,weather.getWeathericon()[i+1]));
-            weekUps[i].setText(weather.getTemp()[i+1].split("~")[0]);
-            weekDowns[i].setText(weather.getTemp()[i+1].split("~")[1]);
+            weekWeatherIconView[i].setImageDrawable(WeatherIconGetter.getWatherIcon(activity, weather.getWeathericon()[i + 1]));
+            weekUps[i].setText(weather.getTemp()[i + 1].split("~")[0]);
+            weekDowns[i].setText(weather.getTemp()[i + 1].split("~")[1]);
         }
 
         return this.cardView;
