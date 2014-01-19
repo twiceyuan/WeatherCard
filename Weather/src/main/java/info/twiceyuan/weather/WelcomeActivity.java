@@ -25,7 +25,7 @@ public class WelcomeActivity extends Activity {
     private NowLayout currentCard;
 
     private final int[] ids = {R.id.welcome_layout_1,R.id.welcome_layout_1,R.id.welcome_layout_2,R.id.welcome_layout_2};
-    private final String[] weathertexts = {"晴","云","阴","雨"};
+    private final String[] weather_texts = {"晴","云","阴","雨"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +64,11 @@ public class WelcomeActivity extends Activity {
                 ImageView icon = (ImageView) newCardContent.getChildAt(0);
                 TextView  text = (TextView)  newCardContent.getChildAt(1);
 
+                assert icon != null;
                 icon.setImageDrawable(WeatherIconGetter.getWatherIcon(WelcomeActivity.this,i));
 
-                text.setText(weathertexts[i]);
+                assert text != null;
+                text.setText(weather_texts[i]);
 
                 currentCard = new NowLayout(WelcomeActivity.this);
                 currentCard.addView(newCardContent);
