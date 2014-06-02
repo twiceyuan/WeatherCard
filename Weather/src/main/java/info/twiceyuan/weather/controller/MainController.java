@@ -148,7 +148,7 @@ public class MainController implements Button.OnClickListener {
                 // http://m.weather.com.cn/data/[城市编号].html
                 // http://m.weather.com.cn/data/101070201.html
 
-                String url = "http://m.weather.com.cn/data/" + cityNumbers.get(i) + ".html";
+                String url = "http://m.weather.com.cn/atad/" + cityNumbers.get(i) + ".html";
 
                 InputStream is = StreamGetter.get(url);
 
